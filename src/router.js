@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from "./views/Home.vue";
-import Users from "./views/Users.vue";
-import UsersPosts from "./views/UsersPosts.vue";
-import UsersProfile from "./views/UsersProfile.vue";
-import HeaderHome from "./views/Header.Home.vue";
-import HeaderUsers from "./views/Header.Users.vue";
+const Home = () => import("./views/Home.vue");
+const Users = () => import("./views/Home.vue");
+const UsersPosts = () => import("./views/Home.vue");
+const UsersProfile = () => import("./views/Home.vue");
+const HeaderHome = () => import("./views/Home.vue");
+const HeaderUsers = () => import("./views/Home.vue");
 
 Vue.use(Router);
 
@@ -25,14 +25,31 @@ export default new Router({
         default: Users,
         header: HeaderUsers
       },
-      props: {
-        default: true,
-        header: false
-      },
+      props: true,
       children: [
         { path: "posts", component: UsersPosts},
         { path: "profile", component: UsersProfile, name: "users-id-profile"}
       ]
+    },
+    {
+      path: "*",
+      redirect: "/"
     }
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    return new Promise(resolve => {
+      this.app.$root.$once("triggerScroll", () => {
+        let position = { x: 0, y: 0 }
+        if (savedPosition) {
+          position = savedPosition;
+        }
+        if (to.hash) {
+          position = {
+            selector: to.hash
+          };
+        }
+        resolve(position);
+      });
+    });
+  }
 });
