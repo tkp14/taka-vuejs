@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 const Home = () => import("./views/Home.vue");
-const Users = () => import("./views/Home.vue");
-const UsersPosts = () => import("./views/Home.vue");
-const UsersProfile = () => import("./views/Home.vue");
-const HeaderHome = () => import("./views/Home.vue");
-const HeaderUsers = () => import("./views/Home.vue");
+const Users = () => import("./views/Users.vue");
+const UsersPosts = () => import("./views/UsersPosts.vue");
+const UsersProfile = () => import("./views/UsersProfile.vue");
+const HeaderHome = () => import("./views/HeaderHome.vue");
+const HeaderUsers = () => import("./views/HeaderUsers.vue");
 
 Vue.use(Router);
 
